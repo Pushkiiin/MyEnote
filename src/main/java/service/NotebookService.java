@@ -2,10 +2,12 @@ package service;
 
 import DAO.NotebookDAOImpl;
 import model.Notebook;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class NotebookService {
 
     private NotebookDAOImpl notebookDAO = new NotebookDAOImpl();

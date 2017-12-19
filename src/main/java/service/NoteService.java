@@ -2,30 +2,32 @@ package service;
 
 import DAO.NoteDAOImpl;
 import model.Note;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class NoteService {
     private NoteDAOImpl noteDAO = new NoteDAOImpl();
 
-    void add(Note note) throws SQLException{
+    public void add(Note note) throws SQLException{
         noteDAO.add(note);
     }
 
-    List<Note> getAll() throws SQLException{
+    public List<Note> getAll() throws SQLException{
         return noteDAO.getAll();
     }
 
-    Note getById(int id) throws SQLException{
+    public Note getById(int id) throws SQLException{
         return noteDAO.getById(id);
     }
 
-    void update(Note note) throws SQLException{
+    public void update(Note note) throws SQLException{
         noteDAO.update(note);
     }
 
-    void remove(Note note) throws SQLException{
+    public void remove(Note note) throws SQLException{
         noteDAO.remove(note);
     }
 }

@@ -27,6 +27,10 @@ public class Note {
     public Note() {
     }
 
+    public Note(String content) {
+        this.content = content;
+    }
+
     public int getId() {
         return id;
     }

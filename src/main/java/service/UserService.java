@@ -2,12 +2,20 @@ package service;
 
 import DAO.UserDAOImpl;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class UserService {
-    private UserDAOImpl userDAO = new UserDAOImpl();
+    private UserDAOImpl userDAO;
+
+    @Autowired
+    public void setUserDAO(UserDAOImpl userDAO) {
+        this.userDAO = userDAO;
+    }
 
     void add(User user) throws SQLException{
         userDAO.add(user);
