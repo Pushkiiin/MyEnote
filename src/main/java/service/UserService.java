@@ -17,23 +17,23 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    void add(User user) throws SQLException{
+    public void add(User user) throws SQLException{
         userDAO.add(user);
     }
 
-    List<User> getAll() throws SQLException{
+    public List<User> getAll() throws SQLException{
         return userDAO.getAll();
     }
 
-    User getById(int id) throws SQLException{
+    public User getById(int id) throws SQLException{
         return userDAO.getById(id);
     }
 
-    void update(User user) throws SQLException{
+    public void update(User user) throws SQLException{
         userDAO.update(user);
     }
 
-    void remove(User user) throws SQLException{
+    public void remove(User user) throws SQLException{
         userDAO.remove(user);
     }
 }
