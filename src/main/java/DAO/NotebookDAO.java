@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface NotebookDAO {
 
-    void add(Notebook notebook) throws SQLException;
+    void add(Notebook notebook);
 
-    List<Notebook> getAll() throws SQLException;
+    List<Notebook> getAll();
 
-    Notebook getById(int id) throws SQLException;
+    Notebook getById(int id);
 
-    void update(Notebook notebook) throws SQLException;
-
-    void remove(Notebook notebook) throws SQLException;
+    void remove(Notebook notebook);
 }

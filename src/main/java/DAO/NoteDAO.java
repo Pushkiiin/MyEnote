@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface NoteDAO {
 
-    void add(Note note) throws SQLException;
+    void add(Note note);
 
-    List<Note> getAll() throws SQLException;
+    List<Note> getAll();
 
-    Note getById(int id) throws SQLException;
+    Note getById(long id);
 
-    void update(Note note) throws SQLException;
-
-    void remove(Note note) throws SQLException;
+    void remove(Note note);
 }

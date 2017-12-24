@@ -4,70 +4,35 @@ import model.User;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import utils.SessionUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDAOImpl implements  UserDAO {
 
-    private SessionUtil sessionUtil = new SessionUtil();
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public void add(User user) throws SQLException {
-
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.save(user);
-
-        sessionUtil.closeTransactionSession();
+    public void add(User user) {
+        entityManager.persist(user);
     }
 
-    public List<User> getAll() throws SQLException {
-        sessionUtil.openTransactionSession();
-        String sql = "SELECT * FROM user";
-
-        Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(User.class);
-        List<User> userList = query.list();
-
-        sessionUtil.closeTransactionSession();
-
-        return userList;
+    public List<User> getAll() {
+        TypedQuery<User> query = entityManager.createQuery("SELECT * FROM " + User.class.getName(), User.class);
+        return query.getResultList();
     }
 
-    public User getById(int id) throws SQLException {
-        sessionUtil.openTransactionSession();
-        String sql = "SELECT * FROM user WHERE id = " + id;
-
-        Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(User.class);
-        query.setParameter("id", id);
-
-        User user = (User) query.getSingleResult();
-
-        sessionUtil.closeTransactionSession();
-
-        return user;
+    public User getById(int id) {
+        return entityManager.find(User.class, id);
     }
 
-    public void update(User user) throws SQLException {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.update(user);
-
-        sessionUtil.closeTransactionSession();
-    }
-
-    public void remove(User user) throws SQLException {
-
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.remove(user);
-
-        sessionUtil.closeTransactionSession();
-
+    public void remove(User user) {
+        entityManager.remove(user);
     }
 }

@@ -9,7 +9,7 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "content")
     private String content;
@@ -31,7 +31,7 @@ public class Note {
         this.content = content;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

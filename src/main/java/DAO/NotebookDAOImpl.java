@@ -1,69 +1,38 @@
 package DAO;
 
+import model.Note;
 import model.Notebook;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import utils.SessionUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository("noteBookDao")
 public class NotebookDAOImpl implements NotebookDAO {
 
-    private SessionUtil sessionUtil = new SessionUtil();
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public void add(Notebook notebook) throws SQLException {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.save(notebook);
-
-        sessionUtil.closeTransactionSession();
+    public void add(Notebook notebook) {
+        entityManager.persist(notebook);
     }
 
     public List<Notebook> getAll() throws SQLException {
-        sessionUtil.openTransactionSession();
-        String sql = "SELECT * FROM notebook";
-
-        Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Notebook.class);
-        List<Notebook> notebookList = query.list();
-
-        sessionUtil.closeTransactionSession();
-
-        return notebookList;
+        TypedQuery<Notebook> query = entityManager.createQuery("SELECT * FROM " + Notebook.class.getName(), Notebook.class);
+        return query.getResultList();
     }
 
-    public Notebook getById(int id) throws SQLException {
-        sessionUtil.openTransactionSession();
-        String sql = "SELECT * FROM notebook WHERE id = " + id;
-
-        Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Notebook.class);
-        query.setParameter("id", id);
-
-        Notebook notebook = (Notebook) query.getSingleResult();
-
-        sessionUtil.closeTransactionSession();
-
-        return notebook;
+    public Notebook getById(int id) {
+        return entityManager.find(Notebook.class, id);
     }
 
-    public void update(Notebook notebook) throws SQLException {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.update(notebook);
-
-        sessionUtil.closeTransactionSession();
-    }
-
-    public void remove(Notebook notebook) throws SQLException {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.remove(notebook);
-
-        sessionUtil.closeTransactionSession();
+    public void remove(Notebook notebook) {
+        entityManager.remove(notebook);
     }
 }

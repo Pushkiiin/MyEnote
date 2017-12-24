@@ -12,6 +12,10 @@
         <servlet-name>notes</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -22,7 +26,17 @@
         <param-value>
             classpath:config/dao-context.xml
             classpath:config/service-context.xml
+            classpath:config/security-context.xml
         </param-value>
     </context-param>
+    <filter>
+        <display-name>springSecurityFilterChain</display-name>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

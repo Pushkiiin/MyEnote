@@ -19,7 +19,7 @@ public class NoteService {
         return noteDAO.getAll();
     }
 
-    public Note getById(int id) throws SQLException{
+    public Note getById(long id) throws SQLException{
         return noteDAO.getById(id);
     }
 

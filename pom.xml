@@ -6,7 +6,10 @@
 
     <groupId>epamlab</groupId>
     <artifactId>springlab</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>epamlab Maven Webapp</name>
+    <url>http://maven.apache.org</url>
 
 
 
@@ -129,6 +132,12 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
+            <version>5.0.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
             <version>5.0.0.RELEASE</version>
         </dependency>
 
